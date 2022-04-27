@@ -1,0 +1,9 @@
+.breedImg img {
+    max-width: 150px;
+    max-height: 150px;
+   }
+
+.detail_container {
+    background-color: black;
+    color: white;
+}

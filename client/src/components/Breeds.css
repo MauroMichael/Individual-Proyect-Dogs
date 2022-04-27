@@ -1,0 +1,12 @@
+.gral_container {
+    display: flex;
+    background-color: black;
+    color: white;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.navBar {
+    background-color: grey;
+}

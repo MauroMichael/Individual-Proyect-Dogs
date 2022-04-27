@@ -4,7 +4,7 @@ const router = Router();
 const axios = require('axios');
 const { Op } = require("sequelize");
 
-const apiKey = 'a4f84332f2144e2db97da55f31f95df0';
+const { URL_APIKEY } = process.env;
 
 
 
@@ -13,36 +13,48 @@ router.get('/', async(req, res) => {
 
     if(name){
         try {
-            let apiData = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${apiKey}`);
+            let apiData = await axios.get(URL_APIKEY);
 
             let filteredApiData = apiData.data.filter(d => d.name.toLowerCase().includes(`${name}`.toLowerCase()));
-            // console.log(filteredApiData);
+            const finalApiData = filteredApiData.map(d => ({
+                name: d.name,
+                height: d.height.metric,
+                weight: d.weight.metric,
+                life_span: d.life_span,
+                image: d.image.url,
+                id: d.id,
+                temperaments: d.temperament
+            }));
             let dbData = await Dog.findAll({
                 where: {name:{
                     [Op.iLike]: `%${name}%`
                 }},
+                attributes:[
+                    "name",
+                    "height",
+                    "weight",
+                    "life_span",
+                    "image", 
+                    "id"                      
+                ],
                 include: {
                     model: Temperament,
-                    attributes: ["nameTemp"],
+                    attributes: ["temperaments"],
                     through: { attributes: [] },
                 }
             });
             
-            let apiDbData = dbData.concat(filteredApiData);
+            let apiDbData = dbData.concat(finalApiData);
 
             if(apiDbData.length === 0) {
-                return res.send('The breed does not exist')
+                return res.json([{
+                    name: 'The breed does not exist',
+                    image: 'https://media.istockphoto.com/vectors/prohibition-sign-stop-dog-simple-icon-label-vector-id956788966?s=612x612',
+                    temperaments: 'No temperaments aviable',
+                    weight: 'No weight aviable' 
+                }])
             } else {
-                const breeds = apiDbData.map(d => ({
-                    name: d.name,
-                    height: d.height.metric,
-                    weight: d.weight.metric,
-                    life_span: d.life_span,
-                    image: d.image.url,
-                    id: d.id,
-                    temperament: d.temperament
-                }));
-                return res.json(breeds);
+                return res.json(apiDbData);
             }
         }
         catch (error){
@@ -50,43 +62,38 @@ router.get('/', async(req, res) => {
         }
     }
     else {
-        res.send('You must to input a breed');
+        let apiData = [];
+        let dbData = [];
+        try{
+         apiData = await axios.get(URL_APIKEY)
+         apiData = apiData.data.map(d => ({
+            name: d.name,
+            weight: d.weight.metric,
+            image: d.image.url,
+            id: d.id,
+            temperaments: d.temperament
+        }))
+        dbData = await Dog.findAll({
+            attributes:[
+                "name",
+                "weight",
+                "image", 
+                "id"       
+            ],
+            include: {
+                model: Temperament,
+                attributes: ["temperaments"],
+                through: { attributes: [] },
+            }
+        })
+        const result = apiData.concat(dbData);
+        res.json(result)
+    }
+    catch(error) {
+        res.status(404).send(error);
+    }
     }
 })
-
-router.get('/', async(req, res) => {
-    let apiData = [];
-    let dbData = [];
-    try{
-     apiData = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${apiKey}`)
-     apiData = apiData.data.map(d => ({
-        name: d.name,
-        weight: d.weight.metric,
-        image: d.image.url,
-        id: d.id,
-        temperaments: d.temperament
-    }))
-    dbData = await Dog.findAll({
-        attributes:[
-            "name",
-            "weight",
-            "image", 
-            "id"       
-        ],
-        include: [{
-            model: Temperament,
-            attributes: ["nameTemp"],
-            through: { attributes: [] },
-        }]
-    })
-    const result = apiData.concat(dbData);
-    res.json(result)
-}
-catch(error) {
-    res.status(404).send(error);
-}
-})
-
 
 
 router.get('/:idBreed', async(req, res) => {
@@ -94,7 +101,7 @@ router.get('/:idBreed', async(req, res) => {
 
     if(id < 264) {
         try{
-            const apiBreeds = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${apiKey}`);
+            const apiBreeds = await axios.get(URL_APIKEY);
             const idApiDog = apiBreeds.data.filter(d => d.id === Number(id));
             if(idApiDog.length === 0) res.send('id not found');
             const detailApiDog = idApiDog.map(d => ({
@@ -104,9 +111,9 @@ router.get('/:idBreed', async(req, res) => {
                 life_span: d.life_span,
                 image: d.image.url,
                 id: d.id,
-                temperament: d.temperament
+                temperaments: d.temperament
             }))
-            res.send(detailApiDog);
+            res.json(detailApiDog[0]);
         }
         catch(error){
             res.send(404);

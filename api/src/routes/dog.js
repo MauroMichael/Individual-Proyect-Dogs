@@ -6,18 +6,19 @@ const router = Router();
 
 let idBreed = 265;
 router.post('/', async(req, res) => {
-    const { name, height, weight, life_span, nameTemp } = req.body;
+    const { name, height, weight, life_span, temperaments, image } = req.body;
     try {
         let newBreed = await Dog.create({
             name,
             height,
             weight,
             life_span,
-            id: idBreed++
+            id: idBreed++,
+            image
         })
         const temps = await Temperament.findAll({
             where: {
-                id: nameTemp
+                id: temperaments
             }
         }
         );
