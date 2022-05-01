@@ -1,4 +1,9 @@
- img {
+.detail_container {
+     background-color: black;
+     background-size: cover;
+}
+
+img {
     margin: 10px;
     max-width: 350px;
     max-height: 350px;

@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './DetailBreed.css'
+import './DetailBreed.css';
 
 
 
 export default function DetailBreed() {
     const detail = useSelector(state => state.breedDetail)
-    console.log(detail);
    
     return(
         <div className = 'detail_container'>

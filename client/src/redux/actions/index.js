@@ -10,7 +10,9 @@ export const NAME_AZ = 'NAME_AZ';
 export const NAME_ZA = 'NAME_ZA';
 export const WEIGHT_MIN_MAX = 'WEIGHT_MIN_MAX';
 export const WEIGHT_MAX_MIN = 'WEIGHT_MAX_MIN';
-
+export const GET_DB_BREEDS = 'GET_DB_BREEDS';
+export const GET_API_BREEDS = 'GET_API_BREEDS';
+export const CLEAR_BREED_BY_NAME = 'CLEAR_BREED_BY_NAME';
 
 export function breeds() {
     return function(dispatch) {
@@ -94,18 +96,37 @@ export function createBreed(pupie) {
             image: pupie.image,
             temperaments: pupie.temperaments.map(t => parseInt(t.id))
         }
-        axios.post(`http://localhost3001/dog`, dogBreed)
-            .then(res => {
-                const response = res.data;
-                dispatch({
-                    type: CREATE_BREED,
-                    payload: response
+        if(!dogBreed.name){
+            return alert('You must to input a name')
+        } else {
+            axios.post(`http://localhost:3001/dog`, dogBreed)
+                .then(res => {
+                    const response = res.data;
+                    dispatch({
+                        type: CREATE_BREED,
+                        payload: response
+                    })
                 })
-            })
+                return alert('The breed has succesfully created')
+        }
     }
 
 }
 
+export function getDbBreeds(){
+    return {
+        type: GET_DB_BREEDS
+    }
+}
 
+export function getApiBreeds() {
+    return {
+        type: GET_API_BREEDS
+    }
+}
+
+export function clearBreedByName() {
+    return { type: CLEAR_BREED_BY_NAME}
+}
 
 

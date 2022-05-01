@@ -8,5 +8,26 @@
 }
 
 .navBar {
-    background-color: grey;
+    background-color: hsl(120, 87%, 15%);
+    width: 25%;
+}
+
+.breedsDogs {
+    width: 75%;
+}
+
+.selectors{
+    padding-top: 5rem;
+
+}
+.pagination {
+    margin: 1rem;
+    bottom: 0;
+    width:100%;
+    position:relative
+}
+
+img.doggie:hover {
+    cursor: pointer;
+    size: 9rem
 }

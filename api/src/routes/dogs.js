@@ -18,32 +18,36 @@ router.get('/', async(req, res) => {
             let filteredApiData = apiData.data.filter(d => d.name.toLowerCase().includes(`${name}`.toLowerCase()));
             const finalApiData = filteredApiData.map(d => ({
                 name: d.name,
-                height: d.height.metric,
                 weight: d.weight.metric,
-                life_span: d.life_span,
                 image: d.image.url,
                 id: d.id,
                 temperaments: d.temperament
             }));
-            let dbData = await Dog.findAll({
+            let dbData = (await Dog.findAll({
                 where: {name:{
                     [Op.iLike]: `%${name}%`
                 }},
-                attributes:[
-                    "name",
-                    "height",
-                    "weight",
-                    "life_span",
-                    "image", 
-                    "id"                      
-                ],
+                // attributes:[
+                //     "name",
+                //     "weight",
+                //     "image", 
+                //     "id"                      
+                // ],
                 include: {
                     model: Temperament,
                     attributes: ["temperaments"],
                     through: { attributes: [] },
+                }})).map(p => {
+                return {   
+                    id: p.id,                 
+                    name: p.name,
+                    weight: p.weight,
+                    image: p.image,
+                    temperaments: p.Temperaments.map(t => t.temperaments).toString()
+                    }
                 }
-            });
-            
+            )
+            console.log(dbData)
             let apiDbData = dbData.concat(finalApiData);
 
             if(apiDbData.length === 0) {
@@ -73,24 +77,36 @@ router.get('/', async(req, res) => {
             id: d.id,
             temperaments: d.temperament
         }))
-        dbData = await Dog.findAll({
-            attributes:[
-                "name",
-                "weight",
-                "image", 
-                "id"       
-            ],
+        dbData = (await Dog.findAll({
+            // attributes:[
+            //     "name",
+            //     "weight",
+            //     "image", 
+            //     "id"       
+            // ],
             include: {
                 model: Temperament,
-                attributes: ["temperaments"],
-                through: { attributes: [] },
+                attributes: ["temperaments",'id'],
+                through: { attributes: []},
+            }
+        }))
+        .map(d => {
+            console.log(d.temperaments)
+            return {
+                id: d.id,
+                image: d.image,
+                name: d.name,
+                weight: d.weight,
+                temperaments: d.Temperaments.map(t => t.temperaments).toString()
             }
         })
+        console.log(dbData)
         const result = apiData.concat(dbData);
         res.json(result)
     }
     catch(error) {
-        res.status(404).send(error);
+        console.log(error)
+        // res.status(404).send(error);
     }
     }
 })
@@ -121,8 +137,18 @@ router.get('/:idBreed', async(req, res) => {
     } else {
         try {
             const idDb = await Dog.findByPk(id);
+            let temps = await idDb.getTemperaments();
+               
             idDb
-            ? res.send(idDb)
+            ? res.json({
+                id: idDb.id,
+                name: idDb.name,
+                weight: idDb.weight,
+                height: idDb.height,
+                life_span: idDb.life_span,
+                image: idDb.image,
+                temperaments: temps.map(t => t.temperaments).toString()
+            })
             : res.send('id not found');
         }
         catch(error){
