@@ -1,4 +1,4 @@
-import { ALL_BREEDS, DETAIL_BREED, GET_BREED, GET_TEMPERAMENTS, NAME_AZ, NAME_ZA, TEMPERAMENT_FILTER, WEIGHT_MIN_MAX, WEIGHT_MAX_MIN, CREATE_BREED, GET_DB_BREEDS, GET_API_BREEDS, CLEAR_BREED_BY_NAME } from "../actions";
+import { ALL_BREEDS, DETAIL_BREED, GET_BREED, GET_TEMPERAMENTS, NAME_AZ, NAME_ZA, TEMPERAMENT_FILTER, WEIGHT_MIN_MAX, WEIGHT_MAX_MIN, CREATE_BREED, GET_DB_BREEDS, GET_API_BREEDS, CLEAR_BREED_BY_NAME, CLEAR_BREED_DETAIL } from "../actions";
 
 const initalState = {
     dogsBreeds: [],
@@ -8,19 +8,20 @@ const initalState = {
 }
 
 function nameSort(arr, prop) {
-    // if(prop === 'name'){
-    //     let sorted = arr.sort((a, b) => {
-    //         if(a[prop] < b[prop]) {return -1};
-    //         if(a[prop] > b[prop]) {return 1};
-    //         return 0
-    //     })
-    //     return sorted;
-    // }
-    let sorted = arr.sort((a, b) => {
-        if(a[prop] < b[prop]) {return -1};
-        if(a[prop] > b[prop]) {return 1};
-        return 0
-    })
+    let sorted = [];
+    if(prop === 'name'){
+        sorted = arr.sort((a, b) => {
+            if(a[prop] < b[prop]) {return -1};
+            if(a[prop] > b[prop]) {return 1};
+            return 0
+        })
+    } else {
+            sorted = arr.sort((a, b) => {
+            if(a[prop][0] < b[prop][0]) {return -1};
+            if(a[prop][0] > b[prop][0]) {return 1};
+            return 0
+        })
+    }
     return sorted;
 }
 
@@ -144,6 +145,12 @@ function rootReducer ( state = initalState, action){
             return {
                 ...state,
                 breedByName: []
+            }
+        }
+        case CLEAR_BREED_DETAIL: {
+            return {
+                ...state,
+                breedDetail: {}
             }
         }
         default:

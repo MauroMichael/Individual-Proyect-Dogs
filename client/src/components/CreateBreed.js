@@ -23,6 +23,11 @@ export default function CreateBreed() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const remove = (e) => {
+        e.preventDefault();
+        setBreed({ ...breed, temperaments: breed.temperaments.filter(te => parseInt(te.id) !== parseInt(e.target.value)) })
+      } 
+
     useEffect(() => {
         if(temps.length === 0) dispatch(getTemperaments())
     });
@@ -137,7 +142,7 @@ export default function CreateBreed() {
                     placeholder='Max'
                 />
                 <br />
-                <p>Select Temperaments</p>
+                <h3>Select Temperaments</h3>
                 <select multiple name='temperaments' onChange={handleInputChange}>
                     {
                         temps.map(t => (
@@ -145,6 +150,12 @@ export default function CreateBreed() {
                         ))
                     }
                 </select>
+                <div className = 'choice'> 
+                    <h4>Temperaments Added</h4>
+                    {breed.temperaments.map(t => (
+                        <button onClick = {remove} key = {t.id} value = {t.id}>{t.temperaments} X </button>
+                    ))}
+                </div>
                 <br />
                 <button type='submit'>Create New Breed</button>
                 <br/>

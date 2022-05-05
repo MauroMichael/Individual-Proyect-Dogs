@@ -1,4 +1,38 @@
 .divContainer {
     background-color: black;
     color: white;
+    background-size: cover;
+    font-size: 30px;
+}
+
+.containerForm {
+    text-align: center;
+    background-color: rgb(12, 114, 20);
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 1%;
+    border-radius: 3rem;;
+}
+
+.containerForm input {
+    padding: 0.5rem;
+    border: black solid 3px;
+    background-color: rgb(228, 220, 220);
+    border-radius: 0.5rem;
+    font-size: 18px;
+}
+
+.containerForm select {
+    padding: 0.5rem;
+    margin: -20px;
+    font-size: 18px;
+    
+}
+
+.containerForm button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 18px;
+    margin-bottom: 3%;
+
 }

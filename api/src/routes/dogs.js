@@ -6,6 +6,13 @@ const { Op } = require("sequelize");
 
 const { URL_APIKEY } = process.env;
 
+function numbering(peso) {
+    let [min, max] = peso.split(" - ");
+    min = isNaN(min) ? 'Unknown' : parseInt(min);
+    max = isNaN(max) ? 'Unknown' : parseInt(max);
+    return [min, max];
+}
+
 
 
 router.get('/', async(req, res) => {
@@ -18,7 +25,7 @@ router.get('/', async(req, res) => {
             let filteredApiData = apiData.data.filter(d => d.name.toLowerCase().includes(`${name}`.toLowerCase()));
             const finalApiData = filteredApiData.map(d => ({
                 name: d.name,
-                weight: d.weight.metric,
+                weight: numbering(d.weight.metric),
                 image: d.image.url,
                 id: d.id,
                 temperaments: d.temperament
@@ -41,7 +48,7 @@ router.get('/', async(req, res) => {
                 return {   
                     id: p.id,                 
                     name: p.name,
-                    weight: p.weight,
+                    weight: numbering(p.weight),
                     image: p.image,
                     temperaments: p.Temperaments.map(t => t.temperaments).toString()
                     }
@@ -52,10 +59,10 @@ router.get('/', async(req, res) => {
 
             if(apiDbData.length === 0) {
                 return res.json([{
-                    name: 'The breed does not exist',
+                    name: 'empty00',
                     image: 'https://media.istockphoto.com/vectors/prohibition-sign-stop-dog-simple-icon-label-vector-id956788966?s=612x612',
-                    temperaments: 'No temperaments aviable',
-                    weight: 'No weight aviable' 
+                    temperaments: 'empty00',
+                    weight: 'empty00' 
                 }])
             } else {
                 return res.json(apiDbData);
@@ -72,7 +79,7 @@ router.get('/', async(req, res) => {
          apiData = await axios.get(URL_APIKEY)
          apiData = apiData.data.map(d => ({
             name: d.name,
-            weight: d.weight.metric,
+            weight: numbering(d.weight.metric),
             image: d.image.url,
             id: d.id,
             temperaments: d.temperament
@@ -96,7 +103,7 @@ router.get('/', async(req, res) => {
                 id: d.id,
                 image: d.image,
                 name: d.name,
-                weight: d.weight,
+                weight: numbering(d.weight),
                 temperaments: d.Temperaments.map(t => t.temperaments).toString()
             }
         })
@@ -119,11 +126,11 @@ router.get('/:idBreed', async(req, res) => {
         try{
             const apiBreeds = await axios.get(URL_APIKEY);
             const idApiDog = apiBreeds.data.filter(d => d.id === Number(id));
-            if(idApiDog.length === 0) res.send('id not found');
+            // if(idApiDog.length === 0) res.send('id not found');
             const detailApiDog = idApiDog.map(d => ({
                 name: d.name,
                 height: d.height.metric,
-                weight: d.weight.metric,
+                weight: numbering(d.weight.metric),
                 life_span: d.life_span,
                 image: d.image.url,
                 id: d.id,
@@ -143,7 +150,7 @@ router.get('/:idBreed', async(req, res) => {
             ? res.json({
                 id: idDb.id,
                 name: idDb.name,
-                weight: idDb.weight,
+                weight: numbering(idDb.weight),
                 height: idDb.height,
                 life_span: idDb.life_span,
                 image: idDb.image,

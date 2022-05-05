@@ -4,30 +4,98 @@
     color: white;
     flex-direction: row;
     justify-content: space-around;
+    align-items: stretch;
     padding: 5px;
 }
 
 .navBar {
-    background-color: hsl(120, 87%, 15%);
-    width: 25%;
+    /* height: 1500px; */
+    background-color: rgb(49, 48, 48);
+    /* background-color: hsl(120, 87%, 15%); */
+    width: 350px;
+    text-align: center;
+    
 }
 
+.form {
+    margin-bottom: 8%;
+}
+
+.search-submit{
+    border-radius: 2rem;
+    font-weight: bolder;
+}
+.select-temp {
+    background-color: rgb(228, 220, 220);
+    margin-bottom: 2%;
+    font-weight: bolder;
+    border: rgb(234, 238, 9) solid 3px
+
+}
+.insert-breed {
+    border: rgb(234, 238, 9) solid 3px
+}
+.sort-name {
+    background-color: rgb(228, 220, 220);
+    margin-bottom: 2%;
+    font-weight: bolder;
+    border: rgb(234, 238, 9) solid 3px
+
+}
+.sort-weight {
+    background-color: rgb(228, 220, 220);
+    margin-bottom: 2%;
+    font-weight: bolder;
+    border: rgb(234, 238, 9) solid 3px
+
+}
+.db-api {
+    background-color: rgb(228, 220, 220);
+    margin-bottom: 8%;
+    font-weight: bolder;
+    border: rgb(234, 238, 9) solid 3px
+
+}
+.create {
+    background-color: rgb(10, 3, 3);
+    margin-bottom: 8%;
+    font-weight: bolder;
+    border: rgb(238, 62, 9) solid 3px;
+    color: white;
+    border-radius: 0.5rem;
+    
+}
 .breedsDogs {
-    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 1280px;
 }
 
 .selectors{
-    padding-top: 5rem;
+    margin-top: 10%;
 
+}
+
+.bredds-dogs-pagination {
+    display: flex;
+    flex-direction: column;
 }
 .pagination {
-    margin: 1rem;
-    bottom: 0;
-    width:100%;
-    position:relative
+    color: darkblue;
+    margin: 40px 40px; 
+    cursor: pointer;
+    text-align: center;
+    font-size: 5%;
 }
 
+.doggie {
+   height: auto;
+   width: auto;
+}
 img.doggie:hover {
     cursor: pointer;
-    size: 9rem
+    size: 9rem;
+    position: relative;
 }

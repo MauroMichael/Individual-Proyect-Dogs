@@ -13,6 +13,7 @@ export const WEIGHT_MAX_MIN = 'WEIGHT_MAX_MIN';
 export const GET_DB_BREEDS = 'GET_DB_BREEDS';
 export const GET_API_BREEDS = 'GET_API_BREEDS';
 export const CLEAR_BREED_BY_NAME = 'CLEAR_BREED_BY_NAME';
+export const CLEAR_BREED_DETAIL = 'CLEAR_BREED_DETAIL';
 
 export function breeds() {
     return function(dispatch) {
@@ -128,5 +129,10 @@ export function getApiBreeds() {
 export function clearBreedByName() {
     return { type: CLEAR_BREED_BY_NAME}
 }
+
+export function clearBreedDetail() {
+    return { type: CLEAR_BREED_DETAIL}
+}
+
 
 

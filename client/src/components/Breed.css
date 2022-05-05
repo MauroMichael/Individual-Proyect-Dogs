@@ -1,9 +1,70 @@
-.breedImg img {
+.breed-container {
+    background-color: rgb(12, 114, 20);
+    border:rgb(163, 13, 13) solid 3px;
+    border-radius: 2rem;
+    margin-top: 2%;
+    width: 550px;
+    height: 300px;
+    }
+
+.breed-img img {
     max-width: 150px;
     max-height: 150px;
-   }
-
-.detail_container {
-    background-color: black;
-    color: white;
+    border-radius: 1rem;
+    box-shadow: 10px 5px 5px black;
 }
+
+.breed-img:hover {
+    transform: scale(2);
+
+}
+
+.breed-name {
+    /* background-color: yellow; */
+    margin-top: -2%;
+    text-align: center;
+    
+}
+
+.breed-title {
+    color: yellow;
+    font-size: 25px;
+}
+
+.breed-link {
+    text-decoration: none;
+}
+
+.breed-data {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+       /* background-color: peru; */
+    border-radius: 2rem;
+    padding-left: 6%;
+}
+.breed-img-data {
+    display: flex;
+    flex-direction: row;
+    border-radius: 2rem;
+    margin-left: 3%;
+    /* background-color: rgba(44, 184, 9, 0.705); */
+}
+
+.breed-temps {
+    margin-top: -2%;
+}
+
+.breed-weights {
+    margin-top: 0%;
+}
+
+.breed-temp {
+    font-weight: bolder;
+}
+
+.breed-weight {
+    font-weight: bolder;
+}
+
+

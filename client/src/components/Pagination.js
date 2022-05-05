@@ -1,4 +1,6 @@
 import React from 'react';
+import './LandingPage';
+import './Pagination.css'
 
 function Pagination({dogsPerPage, totalDogs, paginate}){
     const pageNumbers = [];
@@ -8,9 +10,9 @@ function Pagination({dogsPerPage, totalDogs, paginate}){
     }
 
     return (
-        <div>
+        <div className = 'pag-container'>
             {pageNumbers.map(number => (
-                <button key={number} onClick={() => paginate(number)}>{number}</button>
+                <button key={number} className = 'btn-number' onClick={() => paginate(number)}>{number}</button>
                 ))
             }
         </div>
