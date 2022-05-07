@@ -8,8 +8,8 @@ const { URL_APIKEY } = process.env;
 
 function numbering(peso) {
     let [min, max] = peso.split(" - ");
-    min = isNaN(min) ? 'Unknown' : parseInt(min);
-    max = isNaN(max) ? 'Unknown' : parseInt(max);
+    min = isNaN(min) ? '0' : parseInt(min);
+    max = isNaN(max) ? '0' : parseInt(max);
     return [min, max];
 }
 
@@ -54,12 +54,11 @@ router.get('/', async(req, res) => {
                     }
                 }
             )
-            console.log(dbData)
             let apiDbData = dbData.concat(finalApiData);
 
             if(apiDbData.length === 0) {
                 return res.json([{
-                    name: 'empty00',
+                    name: 'The breed does not exist',
                     image: 'https://media.istockphoto.com/vectors/prohibition-sign-stop-dog-simple-icon-label-vector-id956788966?s=612x612',
                     temperaments: 'empty00',
                     weight: 'empty00' 
@@ -98,7 +97,6 @@ router.get('/', async(req, res) => {
             }
         }))
         .map(d => {
-            console.log(d.temperaments)
             return {
                 id: d.id,
                 image: d.image,
@@ -107,13 +105,12 @@ router.get('/', async(req, res) => {
                 temperaments: d.Temperaments.map(t => t.temperaments).toString()
             }
         })
-        console.log(dbData)
         const result = apiData.concat(dbData);
         res.json(result)
     }
     catch(error) {
         console.log(error)
-        // res.status(404).send(error);
+        res.status(404).send(error);
     }
     }
 })

@@ -31,3 +31,9 @@
     color:yellow;
     font-size: 30px;
 }
+
+.detail-button:hover {
+    cursor: pointer;
+    size: 9rem;
+    position: relative;
+}

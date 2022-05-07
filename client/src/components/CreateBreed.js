@@ -157,9 +157,9 @@ export default function CreateBreed() {
                     ))}
                 </div>
                 <br />
-                <button type='submit'>Create New Breed</button>
+                <button className = 'breed-submit' type='submit'>Create New Breed</button>
                 <br/>
-                <button onClick = {redirect}>Back To Home</button>
+                <button className = 'form-back' onClick = {redirect}>Back To Home</button>
             </form>
         </div>
     )

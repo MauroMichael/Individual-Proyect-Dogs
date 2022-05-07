@@ -65,16 +65,23 @@ export default function Breeds() {
     function handleDbApiBreeds(e){
         if((e.target.value) === 'api') return dispatch(getApiBreeds());
         if((e.target.value) === 'db') return dispatch(getDbBreeds());
+        if((e.target.value) === 'all') return clear();
+
     }
     function clear() {
         dispatch(clearBreedByName())
     }
+
+    function imgHome() {
+        dispatch(clearBreedByName());
+        dispatch(breeds());
+}
     
     return(
         <div className = 'gral_container'>
             <div className = 'navBar'>
-                <img src = {henryDog} onClick = {clear} className = 'doggie' alt = 'no aviable'/>
-
+                <img src = {henryDog} onClick = {imgHome} className = 'doggie' alt = 'no aviable'/>
+                <p className = 'owner'>Henry Dogs By Mauro</p>
                 <div className = 'selectors'>
                     <form className = 'form' onSubmit = {submitHandler}>
                         <input className = 'insert-breed' placeholder = 'Insert Breed' onChange = {changeHandler} value = {search.name}/>
@@ -99,7 +106,7 @@ export default function Breeds() {
                         <option value = 'more'>Max - Min Sort</option>
                     </select>
                     <select className = 'db-api' onChange = {handleDbApiBreeds}>
-                        <option defaultValue>Origin Filter Breeds</option>
+                        <option value = 'all'>Origin Filter Breeds</option>
                         <option value = 'db'>Created Breeds</option>
                         <option value = 'api'>Existed Breeds</option>
                     </select>

@@ -7,20 +7,15 @@
     align-items: stretch;
     padding: 5px;
 }
-
 .navBar {
-    /* height: 1500px; */
     background-color: rgb(49, 48, 48);
-    /* background-color: hsl(120, 87%, 15%); */
     width: 350px;
     text-align: center;
-    
-}
+    }
 
 .form {
     margin-bottom: 8%;
 }
-
 .search-submit{
     border-radius: 2rem;
     font-weight: bolder;
@@ -29,32 +24,30 @@
     background-color: rgb(228, 220, 220);
     margin-bottom: 2%;
     font-weight: bolder;
-    border: rgb(234, 238, 9) solid 3px
-
+    border: orange solid 3px;
 }
 .insert-breed {
-    border: rgb(234, 238, 9) solid 3px
+    border: orange solid 3px;
+    margin-bottom: 2%;
+    border-radius: 0.5rem;
 }
 .sort-name {
     background-color: rgb(228, 220, 220);
     margin-bottom: 2%;
     font-weight: bolder;
-    border: rgb(234, 238, 9) solid 3px
-
+    border: orange solid 3px;
 }
 .sort-weight {
     background-color: rgb(228, 220, 220);
     margin-bottom: 2%;
     font-weight: bolder;
-    border: rgb(234, 238, 9) solid 3px
-
+    border: orange solid 3px
 }
 .db-api {
     background-color: rgb(228, 220, 220);
     margin-bottom: 8%;
     font-weight: bolder;
-    border: rgb(234, 238, 9) solid 3px
-
+    border: orange solid 3px
 }
 .create {
     background-color: rgb(10, 3, 3);
@@ -63,7 +56,7 @@
     border: rgb(238, 62, 9) solid 3px;
     color: white;
     border-radius: 0.5rem;
-    
+    margin-top: 5%;
 }
 .breedsDogs {
     display: flex;
@@ -72,12 +65,9 @@
     align-items: flex-start;
     width: 1280px;
 }
-
 .selectors{
     margin-top: 10%;
-
 }
-
 .bredds-dogs-pagination {
     display: flex;
     flex-direction: column;
@@ -89,7 +79,6 @@
     text-align: center;
     font-size: 5%;
 }
-
 .doggie {
    height: auto;
    width: auto;
@@ -98,4 +87,25 @@ img.doggie:hover {
     cursor: pointer;
     size: 9rem;
     position: relative;
+    transform: scale(1.1);
+}
+.owner {
+    color: rgb(44, 192, 192);
+    font-family: fantasy;
+    font-size: 30px;
+    margin-top: -5px;
+    margin-bottom: 100px;
+}
+
+.navBar input {
+    padding: 0.2rem;
+}
+
+.navBar select {
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+}
+.navBar button {
+    padding: 0.2rem;
+    border-radius: 0.5rem;
 }

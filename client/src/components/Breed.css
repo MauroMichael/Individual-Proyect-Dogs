@@ -14,13 +14,12 @@
     box-shadow: 10px 5px 5px black;
 }
 
-.breed-img:hover {
-    transform: scale(2);
+.breed-name:hover {
+    transform: scale(1.2);
 
 }
 
 .breed-name {
-    /* background-color: yellow; */
     margin-top: -2%;
     text-align: center;
     
@@ -39,7 +38,6 @@
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-       /* background-color: peru; */
     border-radius: 2rem;
     padding-left: 6%;
 }
@@ -48,7 +46,6 @@
     flex-direction: row;
     border-radius: 2rem;
     margin-left: 3%;
-    /* background-color: rgba(44, 184, 9, 0.705); */
 }
 
 .breed-temps {
