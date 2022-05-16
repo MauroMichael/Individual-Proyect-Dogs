@@ -11,7 +11,7 @@ function App() {
         <Route path = '/' element = {<LandingPage/>}/>
         <Route path = '/dogs' element = {<Breeds/>}/>
         <Route path = '/dogs/:id' element = {<DetailBreed/>}/>
-        <Route path = '/dogs/createBreed' element = {<CreateBreed/>}></Route>
+        <Route path = '/dogs/createBreed' element = {<CreateBreed/>}/>
       </Routes>
     </div>
   );

@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Breed.css'
 
+
+
 export default function Breed ({id, name, image, temperaments, weight}){
+
 
       return (
         <div className = 'breed-container' key={id}>

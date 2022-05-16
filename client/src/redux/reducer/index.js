@@ -4,7 +4,7 @@ const initalState = {
     dogsBreeds: [],
     temperaments: [],
     breedDetail: {},
-    breedByName: []
+    breedByName: [],
 }
 
 function nameSort(arr, prop) {
@@ -111,7 +111,7 @@ function rootReducer ( state = initalState, action){
                 }
             }
         case CREATE_BREED: {
-            return {...state}
+            return {...state }
             }
         case GET_DB_BREEDS: {
             let resultDb = state.dogsBreeds.filter(d => d.id > 264);

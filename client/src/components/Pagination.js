@@ -1,5 +1,4 @@
 import React from 'react';
-import './LandingPage';
 import './Pagination.css'
 
 function Pagination({dogsPerPage, totalDogs, paginate}){

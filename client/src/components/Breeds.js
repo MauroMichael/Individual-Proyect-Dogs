@@ -13,7 +13,7 @@ export default function Breeds() {
     const dispatch = useDispatch();
     const allDogs = useSelector(state => state);
     const [currentPage, setCurrentPage] = useState(1);
-    const dogsPerPage = 8;
+    const dogsPerPage = 10;
     const indexLastDog = currentPage * dogsPerPage;
     const indexFirstDog = indexLastDog - dogsPerPage;
    
@@ -29,7 +29,6 @@ export default function Breeds() {
     const finalTemp = e => {
         dispatch(temperamentFilter((e.target.value).toLowerCase()))
     }
-
     const [search, setSearch] = useState({name: ''});
     const changeHandler = e => {
         setSearch({name: e.target.value})
@@ -76,7 +75,7 @@ export default function Breeds() {
         dispatch(clearBreedByName());
         dispatch(breeds());
 }
-    
+      
     return(
         <div className = 'gral_container'>
             <div className = 'navBar'>

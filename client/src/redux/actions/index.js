@@ -15,6 +15,7 @@ export const GET_API_BREEDS = 'GET_API_BREEDS';
 export const CLEAR_BREED_BY_NAME = 'CLEAR_BREED_BY_NAME';
 export const CLEAR_BREED_DETAIL = 'CLEAR_BREED_DETAIL';
 
+
 export function breeds() {
     return function(dispatch) {
         axios.get('http://localhost:3001/dogs')
@@ -47,7 +48,6 @@ export function getBreed(name) {
         .then(res => {
             const response = res.data;
             dispatch({type: GET_BREED, payload: response})
-            console.log(response)
         })
         .catch(e => {
             console.log('Error', e)
@@ -73,6 +73,7 @@ export function temperamentFilter(temperament) {
              payload: temperament
             }
 }
+
 export function sortAZ() {
     return { type: NAME_AZ }
 }
@@ -80,9 +81,11 @@ export function sortAZ() {
 export function sortZA() {
     return { type: NAME_ZA }
 }
+
 export function sortLighter() {
     return { type: WEIGHT_MIN_MAX }
 }
+
 export function sortHeavier() {
     return { type: WEIGHT_MAX_MIN}
 }
@@ -91,25 +94,24 @@ export function createBreed(pupie) {
     return function (dispatch) {
         let dogBreed = {
             name: pupie.name,
-            height: `${pupie.hMin} - ${pupie.hMax}`,
-            weight: `${pupie.wMin} - ${pupie.wMax}`,
+            height: pupie.hMin && pupie.hMax ? `${pupie.hMin} - ${pupie.hMax}`: false,
+            weight: pupie.wMin && pupie.wMax ? `${pupie.wMin} - ${pupie.wMax}`: false,
             life_span: `${pupie.l_sMin} - ${pupie.l_sMax}`,
             image: pupie.image,
             temperaments: pupie.temperaments.map(t => parseInt(t.id))
         }
-        if(!dogBreed.name){
-            return alert('You must to input a name')
-        } else {
+            let postBreed = '';
             axios.post(`http://localhost:3001/dog`, dogBreed)
-                .then(res => {
-                    const response = res.data;
-                    dispatch({
-                        type: CREATE_BREED,
-                        payload: response
-                    })
+               .then(res => {
+                postBreed = res.data;        
+                alert(postBreed)  
+                return dispatch({
+                    type: CREATE_BREED,
+                    }) 
                 })
-                return alert('The breed has succesfully created')
-        }
+                .catch(e => {
+                    console.log('Error', e)
+                })   
     }
 
 }
@@ -133,6 +135,12 @@ export function clearBreedByName() {
 export function clearBreedDetail() {
     return { type: CLEAR_BREED_DETAIL}
 }
+
+
+
+
+
+
 
 
 

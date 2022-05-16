@@ -81,7 +81,7 @@ export default function CreateBreed() {
                     name='name'
                     value={breed.name}
                     onChange={handleInputChange}
-                    placeholder='New breed name'
+                    placeholder='New breed name *'
                     
                 />
                 <br />
@@ -100,14 +100,14 @@ export default function CreateBreed() {
                     name='hMin'
                     value={breed.hMin}
                     onChange={handleInputChange}
-                    placeholder='Min'
+                    placeholder='Min *'
                 />
                 <input
                     type='text'
                     name='hMax'
                     value={breed.hMax}
                     onChange={handleInputChange}
-                    placeholder='Max'
+                    placeholder='Max *'
                 />
                 <br />
                 <label htmlFor='weight'>Weight: </label>
@@ -116,14 +116,14 @@ export default function CreateBreed() {
                     name='wMin'
                     value={breed.wMin}
                     onChange={handleInputChange}
-                    placeholder='Min'
+                    placeholder='Min *'
                 />
                 <input
                     type='text'
                     name='wMax'
                     value={breed.wMax}
                     onChange={handleInputChange}
-                    placeholder='Max'
+                    placeholder='Max *'
                 />
                 <br />
                 <label htmlFor='life_span'>Life Span: </label>
@@ -159,7 +159,7 @@ export default function CreateBreed() {
                 <br />
                 <button className = 'breed-submit' type='submit'>Create New Breed</button>
                 <br/>
-                <button className = 'form-back' onClick = {redirect}>Back To Home</button>
+                <button className = 'form-back' type = 'button' onClick = {redirect}>Back To Home</button>
             </form>
         </div>
     )

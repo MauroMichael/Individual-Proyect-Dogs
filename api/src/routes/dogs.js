@@ -6,14 +6,12 @@ const { Op } = require("sequelize");
 
 const { URL_APIKEY } = process.env;
 
-function numbering(peso) {
-    let [min, max] = peso.split(" - ");
+function numbering(w) {
+    let [min, max] = w.split(" - ");
     min = isNaN(min) ? '0' : parseInt(min);
     max = isNaN(max) ? '0' : parseInt(max);
     return [min, max];
 }
-
-
 
 router.get('/', async(req, res) => {
     let { name } = req.query;
@@ -34,16 +32,10 @@ router.get('/', async(req, res) => {
                 where: {name:{
                     [Op.iLike]: `%${name}%`
                 }},
-                // attributes:[
-                //     "name",
-                //     "weight",
-                //     "image", 
-                //     "id"                      
-                // ],
                 include: {
-                    model: Temperament,
-                    attributes: ["temperaments"],
-                    through: { attributes: [] },
+                        model: Temperament,
+                        attributes: ["temperaments"],
+                        through: { attributes: [] },
                 }})).map(p => {
                 return {   
                     id: p.id,                 
@@ -84,12 +76,6 @@ router.get('/', async(req, res) => {
             temperaments: d.temperament
         }))
         dbData = (await Dog.findAll({
-            // attributes:[
-            //     "name",
-            //     "weight",
-            //     "image", 
-            //     "id"       
-            // ],
             include: {
                 model: Temperament,
                 attributes: ["temperaments",'id'],
@@ -117,7 +103,7 @@ router.get('/', async(req, res) => {
 
 
 router.get('/:idBreed', async(req, res) => {
-    const id = req.params.idBreed;
+    const {id} = req.params;
 
     if(id < 264) {
         try{
@@ -143,8 +129,7 @@ router.get('/:idBreed', async(req, res) => {
             const idDb = await Dog.findByPk(id);
             let temps = await idDb.getTemperaments();
                
-            idDb
-            ? res.json({
+             res.json({
                 id: idDb.id,
                 name: idDb.name,
                 weight: numbering(idDb.weight),
@@ -153,7 +138,6 @@ router.get('/:idBreed', async(req, res) => {
                 image: idDb.image,
                 temperaments: temps.map(t => t.temperaments).toString()
             })
-            : res.send('id not found');
         }
         catch(error){
             res.send(404);
