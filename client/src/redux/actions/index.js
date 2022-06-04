@@ -14,11 +14,12 @@ export const GET_DB_BREEDS = 'GET_DB_BREEDS';
 export const GET_API_BREEDS = 'GET_API_BREEDS';
 export const CLEAR_BREED_BY_NAME = 'CLEAR_BREED_BY_NAME';
 export const CLEAR_BREED_DETAIL = 'CLEAR_BREED_DETAIL';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
 
 
 export function breeds() {
     return function(dispatch) {
-        axios.get('http://localhost:3001/dogs')
+        axios.get(`${API_URL}/dogs`)
         .then(res => {
             const response = res.data;
             dispatch({type: ALL_BREEDS, payload: response})
@@ -31,7 +32,7 @@ export function breeds() {
 
 export function detailBreed(id) {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/dogs/${id}`)
+        axios.get(`${API_URL}/dogs/${id}`)
         .then(res => {
             const response = res.data;
             dispatch({type: DETAIL_BREED, payload: response})
@@ -44,7 +45,7 @@ export function detailBreed(id) {
 
 export function getBreed(name) {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/dogs?name=${name}`)
+        axios.get(`${API_URL}/dogs?name=${name}`)
         .then(res => {
             const response = res.data;
             dispatch({type: GET_BREED, payload: response})
@@ -57,7 +58,7 @@ export function getBreed(name) {
 
 export function getTemperaments() {
     return function(dispatch) {
-        axios.get('http://localhost:3001/temperament')
+        axios.get(`${API_URL}/temperament`)
         .then(res => {
             const response = res.data;
             dispatch({type:GET_TEMPERAMENTS, payload: response})
@@ -101,7 +102,7 @@ export function createBreed(pupie) {
             temperaments: pupie.temperaments.map(t => parseInt(t.id))
         }
             let postBreed = '';
-            axios.post(`http://localhost:3001/dog`, dogBreed)
+            axios.post(`${API_URL}/dog`, dogBreed)
                .then(res => {
                 postBreed = res.data;        
                 alert(postBreed)  
