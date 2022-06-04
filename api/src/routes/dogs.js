@@ -102,7 +102,7 @@ router.get('/', async(req, res) => {
 })
 
 
-router.get('/:idBreed', async(req, res) => {
+router.get('/:id', async(req, res) => {
     const {id} = req.params;
 
     if(id < 264) {
