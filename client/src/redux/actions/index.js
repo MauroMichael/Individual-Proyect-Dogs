@@ -14,7 +14,7 @@ export const GET_DB_BREEDS = 'GET_DB_BREEDS';
 export const GET_API_BREEDS = 'GET_API_BREEDS';
 export const CLEAR_BREED_BY_NAME = 'CLEAR_BREED_BY_NAME';
 export const CLEAR_BREED_DETAIL = 'CLEAR_BREED_DETAIL';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+const API_URL = "https://mauroapidogs.herokuapp.com"
 
 
 export function breeds() {
